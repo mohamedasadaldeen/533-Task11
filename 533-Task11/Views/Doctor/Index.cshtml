@@ -1,0 +1,153 @@
+﻿@model List<Doctor>
+
+@{
+    ViewData["Title"] = "Index Doctor";
+}
+
+<div class="container py-5">
+
+    <!-- Page Title -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">
+            Our Doctors
+        </h1>
+
+        <p class="text-muted">
+            Find the right doctor and book your appointment.
+        </p>
+    </div>
+
+
+    <!-- Filters -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+
+            <form>
+
+                <div class="row g-3 align-items-end">
+
+                    <!-- Name Filter -->
+                    <div class="col-md-4">
+
+                        <input type="text" class="form-control" placeholder="Search by doctor name..." name="DoctorName">
+                                
+
+                    </div>
+
+
+                    <!-- Specialization Filter -->
+                    <div class="col-md-4">
+
+
+                        <select class="form-select" name="Special_Id">
+                            <option>  Specialization  </option>
+                         
+                            @foreach (var item in ViewBag.Specialization)
+                            {
+                                <option value="@item.Specialization_Id">@item.Title</option>
+                            }
+                        </select>
+
+                    </div>
+
+
+                    <!-- Filter Button -->
+                    <div class="col-md-2">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+
+                            <i class="bi bi-search me-1"></i>
+                            Filter
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- Reset Button -->
+                    <div class="col-md-2">
+
+                        <a href="/Doctor/Index"
+                           class="btn btn-outline-secondary w-100">
+
+                            <i class="bi bi-arrow-clockwise me-1"></i>
+                            Reset
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Doctors -->
+    <div class="row g-4">
+
+        <!-- Doctor 1 -->
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <img src="~/images/@item.Image"
+                    class="card-img-top"
+                    style="height:300px; object-fit:cover;"
+                    >
+
+                    <div class="card-body text-center">
+
+                        <h5 class="card-title fw-bold mb-2">
+                            @item.Name
+                        </h5>
+
+                        <p class="text-primary fw-semibold mb-4">
+                            <i class="bi bi-heart-pulse me-1"></i>
+                            @item.Specialization.Title
+                        </p>
+
+                        <a href="/BookAppointment/Index/@item.Doctor_Id"
+                        class="btn btn-primary w-100">
+
+                            <i class="bi bi-calendar-plus me-2"></i>
+                            Book Appointment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center align-items-center">
+    <ul class="pagination">
+
+        <li class="page-item @(ViewBag.CurrentPage==1 ? "disabled" : "")">
+            <a class="page-link" href="/Doctor/Index?Page=@(ViewBag.CurrentPage-1)">Previous</a>
+        </li>
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(ViewBag.CurrentPage==i ? "active" : "")">
+                <a class="page-link" href="/Doctor/Index?Page=@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+            <a class="page-link" href="/Doctor/Index?Page=@(ViewBag.CurrentPage + 1)">Next</a>
+        </li>
+
+    </ul>
+</nav>

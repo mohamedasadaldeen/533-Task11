@@ -1,0 +1,73 @@
+﻿@model Doctor
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <h3 class="fw-bold mb-1">
+                        <i class="bi bi-calendar2-check me-2"></i>
+                        Patient Appointment
+                    </h3>
+                    <p class="mb-0">Enter patient information</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-controller="BookAppointment" asp-action="Index" method="post">
+
+                        <input type="hidden" name="Doctor_Id" value="@Model.Doctor_Id">
+
+                        <!-- Patient Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Patient Name</label>
+                            <input type="text" name="Name" class="form-control" placeholder="Enter patient name" required>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Gender</label>
+                            <select name="Gender" class="form-select" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Date of Birth</label>
+                            <input type="date" name="DOB" class="form-control" required>
+                        </div>
+
+                        <!-- Appointment Date -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Appointment Date</label>
+                            <input type="date" name="AppointmentDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                        </div>
+
+                        <!-- Appointment Time -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Appointment Time</label>
+                            <input type="time" name="AppointmentTime" class="form-control" required>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-grow-1">
+                                <i class="bi bi-check-circle me-1"></i>
+                                Book Appointment
+                            </button>
+                            <a asp-controller="Doctor" asp-action="Index" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
