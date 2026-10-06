@@ -1,0 +1,38 @@
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    //Insert Data(Doctor) 
+    modelBuilder.Entity<Doctor>().HasData(
+        new Doctor { Doctor_Id = 1, Name = "Mohamed", Image = "doctor1.jpg", Specialization_Id = 1 },
+        new Doctor { Doctor_Id = 2, Name = "Ahmed", Image = "doctor2.jpg", Specialization_Id = 2 },
+        new Doctor { Doctor_Id = 3, Name = "Habiba", Image = "doctor3.jpg", Specialization_Id = 1 },
+        new Doctor { Doctor_Id = 4, Name = "Abdullah", Image = "doctor4.jpg", Specialization_Id = 3 },
+        new Doctor { Doctor_Id = 5, Name = "Karim", Image = "doctor5.jpg", Specialization_Id = 2 },
+        new Doctor { Doctor_Id = 6, Name = "Malak", Image = "doctor6.jpg", Specialization_Id = 3 }
+    );
+
+    //Insert Data(Patient) 
+    modelBuilder.Entity<Patient>().HasData(
+        new Patient { Patient_Id = 1, Name = "Ali", DOB = new DateOnly(1990, 5, 14), Gender = "Male" },
+        new Patient { Patient_Id = 2, Name = "Sara", DOB = new DateOnly(1985, 8, 22), Gender = "Female" },
+        new Patient { Patient_Id = 3, Name = "Youssef", DOB = new DateOnly(2000, 1, 10), Gender = "Male" },
+        new Patient { Patient_Id = 4, Name = "Laila", DOB = new DateOnly(1995, 11, 5), Gender = "Female" },
+        new Patient { Patient_Id = 5, Name = "Omar", DOB = new DateOnly(1980, 3, 30), Gender = "Male" },
+        new Patient { Patient_Id = 6, Name = "Mariam", DOB = new DateOnly(1992, 7, 18), Gender = "Female" }
+    );
+
+    //Insert Data(Specialization) 
+    modelBuilder.Entity<Specialization>().HasData(
+        new Specialization { Specialization_Id = 1, Title = "Dentistry" },
+        new Specialization { Specialization_Id = 2, Title = "Dermatology" },
+        new Specialization { Specialization_Id = 3, Title = "ENT" },
+        new Specialization { Specialization_Id = 4, Title = "Cardiology" },
+        new Specialization { Specialization_Id = 5, Title = "Urology" }
+    );
+
+    //Insert Data(Specialization) 
+    modelBuilder.Entity<Appointment>().HasData(
+        new Appointment { Appointment_Id = 1, Date = new DateOnly(2024, 11, 1), Time = new TimeOnly(9, 0), Patient_Id = 1, Doctor_Id = 2 },
+        new Appointment { Appointment_Id = 2, Date = new DateOnly(2024, 11, 2), Time = new TimeOnly(10, 30), Patient_Id = 2, Doctor_Id = 4 },
+        new Appointment { Appointment_Id = 3, Date = new DateOnly(2024, 11, 2), Time = new TimeOnly(11, 0), Patient_Id = 3, Doctor_Id = 1 }
+    );
+}
